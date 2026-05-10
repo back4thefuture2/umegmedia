@@ -1,13 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>UMEG Media | Circle City Band 2026</title>
   <meta name="description" content="UMEG Media presents Circle City Band 2026: Funkin 4 Health & Wellness. Music, merch, community impact, partnerships, and supporter opportunities." />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
+<script>
+const SUPABASE_URL = "https://ciutbjzrtddwpusswirf.supabase.co/rest/v1/";
+const SUPABASE_KEY = "sb_publishable_-UUH8rh5czU5ynhvT-DMkw_0jQYEcCP";
+
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const form = document.querySelector("form");
+
+form.addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const name = form.querySelector('input[placeholder="Name / Organization"]').value;
+  const email = form.querySelector('input[placeholder="Email Address"]').value;
+  const interest = form.querySelector("select").value;
+  const message = form.querySelector("textarea").value;
+
+  const { error } = await supabaseClient
+    .from("contacts")
+    .insert([
+      {
+        name,
+        email,
+        interest,
+        message
+      }
+    ]);
+
+  if (error) {
+    alert("Something went wrong.");
+    console.error(error);
+  } else {
+    alert("Message sent successfully!");
+    form.reset();
+  }
+});
+</script>
+  <body>
   <header class="topbar">
     <a class="brand" href="#home">
       <img src="assets/umeg-logo.jpeg" alt="UMEG Media logo" />
@@ -153,7 +190,7 @@
           <option>I want partnership information</option>
         </select>
         <textarea placeholder="Message"></textarea>
-        <button type="button">Send Message</button>
+        <<button type="submit">">Send Message</button>
       </form>
     </section>
   </main>
@@ -162,5 +199,41 @@
     <div><img src="assets/umeg-logo.jpeg" alt="UMEG Media logo" /><p>A division of United Music Entertainment Group</p></div>
     <div class="footer-links"><a href="#album">Album</a><a href="#merch">Merch</a><a href="#supporters">Support</a><a href="#contact">Contact</a></div>
   </footer>
+<script>
+const SUPABASE_URL = "PASTE_YOUR_API_URL";
+const SUPABASE_KEY = "PASTE_YOUR_PUBLISHING_KEY";
+
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const form = document.querySelector("form");
+
+form.addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const name = form.querySelector('input[placeholder="Name / Organization"]').value;
+  const email = form.querySelector('input[placeholder="Email Address"]').value;
+  const interest = form.querySelector("select").value;
+  const message = form.querySelector("textarea").value;
+
+  const { error } = await supabaseClient
+    .from("contacts")
+    .insert([
+      {
+        name,
+        email,
+        interest,
+        message
+      }
+    ]);
+
+  if (error) {
+    alert("Something went wrong.");
+    console.error(error);
+  } else {
+    alert("Message sent successfully!");
+    form.reset();
+  }
+});
+</script>
 </body>
 </html>
